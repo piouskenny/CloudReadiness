@@ -1,0 +1,439 @@
+# PDF import and answer review
+
+All imported prompts and candidate solutions received AI content review. AWS documentation was consulted for targeted issues, not individually for every question. Community votes and printed keys are not proof of correctness. Flagged questions remain available for inspection but are excluded from tests. Domain and service labels are inferred study aids.
+
+Review date: 2026-10-26. Source pages are one-based PDF pages.
+
+## CLF
+
+{'imported': 229, 'reviewed': 228, 'flagged': 1, 'correctedKeys': 6, 'wordingRepairs': 19, 'domains': {'Billing, Pricing, and Support': 41, 'Cloud Technology and Services': 112, 'Security and Compliance': 57, 'Cloud Concepts': 18}}
+
+### Answer-key changes and wording repairs
+
+- Q2 (page 4): PDF B → reviewed B. Wording repaired. 
+- Q7 (page 6): PDF C → reviewed C. Wording repaired. 
+- Q10 (page 7): PDF CD → reviewed CD. Wording repaired. 
+- Q50 (page 23): PDF C → reviewed C. Wording repaired. 
+- Q60 (page 27): PDF B → reviewed B. Wording repaired. 
+- Q64 (page 28): PDF CD → reviewed BC. Wording repaired. WorkSpaces supplies virtual desktops; WorkSpaces Applications streams applications. A VPN supplies connectivity, not desktops.
+- Q66 (page 29): PDF A → reviewed A. Wording repaired. DynamoDB normally offers single-digit millisecond latency. Microsecond reads require a cache such as DAX; the PDF overstated native latency.
+- Q85 (page 36): PDF A → reviewed A. Wording repaired. 
+- Q88 (page 38): PDF D → reviewed D. Wording repaired. The original choices did not clearly distinguish the guest OS from underlying AWS infrastructure. Customers manage the EC2 guest OS.
+- Q121 (page 51): PDF D → reviewed D. Wording repaired. 
+- Q126 (page 53): PDF C → reviewed C. Wording repaired. 
+- Q142 (page 59): PDF C → reviewed A. Benefits management defines and tracks the business outcomes of cloud investment. Application portfolio management addresses application portfolios.
+- Q151 (page 62): PDF A → reviewed A. Wording repaired. 
+- Q157 (page 64): PDF CD → reviewed CD. Wording repaired. 
+- Q166 (page 67): PDF B → reviewed D. AWS Health provides service health and operational event information. Service Catalog manages approved products.
+- Q170 (page 68): PDF C → reviewed C. Wording repaired. 
+- Q173 (page 69): PDF C → reviewed A. AWS CAF assesses organizational cloud readiness and capability gaps. Well-Architected reviews workload architecture.
+- Q178 (page 70): PDF BC → reviewed BC. Wording repaired. 
+- Q207 (page 80): PDF B → reviewed A. Wording repaired. IAM user groups let administrators manage permissions for users with the same job function together.
+- Q220 (page 84): PDF C → reviewed C. Wording repaired. 
+- Q223 (page 85): PDF B → reviewed D. Wording repaired. Aurora Serverless adjusts compute capacity to demand. The prompt now makes the capacity-management requirement explicit.
+- Q225 (page 86): PDF B → reviewed B. Wording repaired. 
+
+### Flagged, excluded from tests
+
+- Q150 (page 61): AWS Snowmobile is retired; the source scenario has no currently valid answer among its original choices.
+
+## SAA
+
+{'imported': 882, 'reviewed': 798, 'flagged': 84, 'correctedKeys': 302, 'wordingRepairs': 15, 'domains': {'Design High-Performing Architectures': 290, 'Design Secure Architectures': 223, 'Design Resilient Architectures': 138, 'Design Cost-Optimized Architectures': 147}}
+
+### Answer-key changes and wording repairs
+
+- Q6 (page 3): PDF C → reviewed B. A physical Snowball import avoids transferring 70 TB over the network. Snowball availability is restricted to eligible existing customers; this source scenario assumes eligibility. This legacy device scenario assumes an eligible existing Snowball customer; new customer availability is restricted.
+- Q7 (page 3): PDF A → reviewed D. 
+- Q8 (page 4): PDF C → reviewed B. 
+- Q9 (page 4): PDF D → reviewed B. File Gateway keeps a local cache and stores objects in S3. Archived objects that are no longer cached must be restored before they can be read.
+- Q10 (page 5): PDF A → reviewed B. FIFO ordering is guaranteed within a message group; use the same group when all orders must preserve one order.
+- Q11 (page 5): PDF B → reviewed A. 
+- Q12 (page 6): PDF C → reviewed A. 
+- Q16 (page 8): PDF D → reviewed B. 
+- Q19 (page 9): PDF B → reviewed D. 
+- Q24 (page 12): PDF C → reviewed B. Cost Explorer breaks down historical costs by dimensions such as instance type. To identify the actor or API that changed an instance, inspect CloudTrail separately.
+- Q27 (page 13): PDF B → reviewed A. 
+- Q28 (page 14): PDF A → reviewed B. IAM Identity Center integration through AWS Managed Microsoft AD uses a two-way forest trust with the self-managed directory.
+- Q29 (page 14): PDF C → reviewed A. 
+- Q36 (page 17): PDF C → reviewed B. A KMS multi-Region key has related keys with shared key material and key ID, supporting this client-side cross-Region encryption design.
+- Q39 (page 19): PDF B → reviewed A. 
+- Q44 (page 21): PDF BD → reviewed AB. 
+- Q46 (page 22): PDF B → reviewed B. Wording repaired. The original B choice only notified an administrator and did not automate remediation. It was corrected to include EventBridge and Lambda remediation.
+- Q47 (page 23): PDF D → reviewed D. Wording repaired. On-Demand Capacity Reservations are scoped to individual Availability Zones, so three zones require separate reservations.
+- Q48 (page 23): PDF A → reviewed D. 
+- Q51 (page 25): PDF DE → reviewed BD. 
+- Q52 (page 25): PDF C → reviewed C. Wording repaired. EFS supports large file systems, but an individual file has a size limit. The wording is corrected to refer to data sets rather than individual files hundreds of terabytes in size.
+- Q56 (page 27): PDF D → reviewed C. 
+- Q87 (page 43): PDF A → reviewed D. 
+- Q88 (page 43): PDF B → reviewed A. Requester Pays shifts request and data-transfer costs to the requester; the bucket owner still pays for storage.
+- Q90 (page 44): PDF D → reviewed B. 
+- Q98 (page 49): PDF A → reviewed C. 
+- Q100 (page 50): PDF D → reviewed C. 
+- Q107 (page 53): PDF D → reviewed B. 
+- Q114 (page 57): PDF A → reviewed C. 
+- Q117 (page 58): PDF C → reviewed A. 
+- Q119 (page 59): PDF A → reviewed B. 
+- Q120 (page 60): PDF A → reviewed B. 
+- Q125 (page 62): PDF CE → reviewed AE. Place application instances and the database in private subnets, with the public load balancer and per-AZ NAT gateways in public subnets. The PDF duplicated choice D; the fifth option is labeled E here.
+- Q127 (page 63): PDF A → reviewed D. 
+- Q128 (page 63): PDF A → reviewed B. 
+- Q133 (page 65): PDF D → reviewed A. The provided RDS Custom managed cross-Region read-replica choice is unsupported. Self-managed Oracle on EC2 with replication is the valid original option.
+- Q134 (page 66): PDF A → reviewed C. 
+- Q136 (page 67): PDF CD → reviewed AC. 
+- Q137 (page 67): PDF D → reviewed B. 
+- Q139 (page 68): PDF A → reviewed B. Replication does not generate the destination ObjectCreated notification assumed by the other design. A direct copy and destination event path meets the requirement.
+- Q141 (page 69): PDF B → reviewed A. 
+- Q156 (page 77): PDF AC → reviewed AE. 
+- Q157 (page 77): PDF BE → reviewed DE. 
+- Q161 (page 79): PDF D → reviewed B. 
+- Q163 (page 80): PDF C → reviewed A. 
+- Q167 (page 82): PDF C → reviewed D. 
+- Q171 (page 84): PDF D → reviewed B. 
+- Q172 (page 84): PDF A → reviewed C. 
+- Q176 (page 86): PDF D → reviewed A. 
+- Q184 (page 90): PDF C → reviewed A. 
+- Q188 (page 92): PDF D → reviewed A. 
+- Q189 (page 93): PDF CE → reviewed BD. 
+- Q190 (page 93): PDF D → reviewed B. 
+- Q191 (page 94): PDF B → reviewed A. 
+- Q192 (page 94): PDF CD → reviewed BE. 
+- Q193 (page 95): PDF A → reviewed B. 
+- Q194 (page 95): PDF C → reviewed A. 
+- Q195 (page 96): PDF D → reviewed C. 
+- Q197 (page 97): PDF BD → reviewed BE. 
+- Q199 (page 98): PDF C → reviewed B. 
+- Q200 (page 98): PDF A → reviewed D. 
+- Q204 (page 100): PDF D → reviewed C. 
+- Q206 (page 101): PDF D → reviewed C. 
+- Q208 (page 102): PDF B → reviewed A. 
+- Q210 (page 103): PDF C → reviewed D. 
+- Q214 (page 105): PDF D → reviewed B. 
+- Q217 (page 107): PDF D → reviewed A. 
+- Q218 (page 107): PDF AE → reviewed AE. Wording repaired. 
+- Q225 (page 111): PDF A → reviewed B. 
+- Q236 (page 116): PDF A → reviewed D. 
+- Q238 (page 117): PDF B → reviewed C. Wording repaired. 
+- Q240 (page 118): PDF C → reviewed D. 
+- Q243 (page 119): PDF C → reviewed A. 
+- Q246 (page 121): PDF C → reviewed D. Wording repaired. 
+- Q247 (page 121): PDF AC → reviewed CE. 
+- Q250 (page 123): PDF A → reviewed D. 
+- Q258 (page 128): PDF A → reviewed D. 
+- Q274 (page 136): PDF D → reviewed B. 
+- Q276 (page 137): PDF AC → reviewed AD. 
+- Q277 (page 137): PDF A → reviewed D. 
+- Q278 (page 138): PDF CD → reviewed BE. 
+- Q279 (page 138): PDF B → reviewed A. 
+- Q280 (page 139): PDF A → reviewed B. 
+- Q281 (page 139): PDF D → reviewed A. 
+- Q282 (page 140): PDF C → reviewed B. 
+- Q286 (page 142): PDF B → reviewed C. 
+- Q288 (page 143): PDF A → reviewed C. 
+- Q289 (page 143): PDF D → reviewed B. 
+- Q290 (page 143): PDF B → reviewed C. 
+- Q291 (page 144): PDF CE → reviewed AB. 
+- Q296 (page 146): PDF B → reviewed D. 
+- Q297 (page 147): PDF D → reviewed B. 
+- Q298 (page 147): PDF D → reviewed C. 
+- Q299 (page 148): PDF D → reviewed B. 
+- Q307 (page 152): PDF A → reviewed D. 
+- Q309 (page 153): PDF D → reviewed A. 
+- Q311 (page 154): PDF D → reviewed C. 
+- Q312 (page 154): PDF C → reviewed B. 
+- Q315 (page 156): PDF C → reviewed D. Wording repaired. 
+- Q316 (page 156): PDF A → reviewed C. 
+- Q319 (page 158): PDF B → reviewed A. 
+- Q330 (page 163): PDF C → reviewed A. 
+- Q334 (page 165): PDF B → reviewed A. 
+- Q335 (page 165): PDF C → reviewed B. 
+- Q338 (page 167): PDF D → reviewed B. 
+- Q339 (page 167): PDF D → reviewed C. 
+- Q340 (page 168): PDF C → reviewed A. 
+- Q341 (page 168): PDF C → reviewed D. 
+- Q343 (page 169): PDF B → reviewed C. 
+- Q346 (page 171): PDF C → reviewed D. 
+- Q347 (page 171): PDF D → reviewed A. 
+- Q348 (page 172): PDF A → reviewed B. 
+- Q355 (page 175): PDF A → reviewed D. 
+- Q358 (page 177): PDF D → reviewed C. 
+- Q360 (page 178): PDF A → reviewed B. 
+- Q361 (page 178): PDF B → reviewed C. 
+- Q362 (page 179): PDF BD → reviewed BE. 
+- Q375 (page 185): PDF B → reviewed A. 
+- Q379 (page 187): PDF C → reviewed B. 
+- Q380 (page 188): PDF A → reviewed D. 
+- Q381 (page 188): PDF D → reviewed B. 
+- Q384 (page 190): PDF B → reviewed C. 
+- Q389 (page 192): PDF D → reviewed A. 
+- Q391 (page 193): PDF D → reviewed C. 
+- Q395 (page 195): PDF B → reviewed C. 
+- Q398 (page 197): PDF B → reviewed C. This legacy device scenario assumes an eligible existing Snowball customer; new customer availability is restricted.
+- Q403 (page 199): PDF A → reviewed D. 
+- Q407 (page 201): PDF C → reviewed D. 
+- Q409 (page 202): PDF A → reviewed C. 
+- Q414 (page 205): PDF C → reviewed B. 
+- Q419 (page 207): PDF AD → reviewed AC. Wording repaired. Enable default EBS encryption in each applicable account and Region, and use an SCP to deny unencrypted volumes in member accounts. A management-account setting does not propagate to members.
+- Q420 (page 208): PDF A → reviewed D. 
+- Q421 (page 208): PDF C → reviewed B. 
+- Q426 (page 211): PDF B → reviewed A. 
+- Q435 (page 216): PDF D → reviewed A. This legacy device scenario assumes an eligible existing Snowball customer; new customer availability is restricted.
+- Q446 (page 222): PDF C → reviewed D. 
+- Q449 (page 223): PDF C → reviewed B. 
+- Q450 (page 224): PDF ACF → reviewed CEF. 
+- Q453 (page 225): PDF A → reviewed D. 
+- Q459 (page 228): PDF C → reviewed A. 
+- Q461 (page 229): PDF A → reviewed B. 
+- Q483 (page 240): PDF A → reviewed C. 
+- Q499 (page 249): PDF B → reviewed D. 
+- Q502 (page 250): PDF DE → reviewed CE. 
+- Q508 (page 253): PDF BC → reviewed BD. 
+- Q510 (page 254): PDF B → reviewed C. 
+- Q517 (page 258): PDF D → reviewed A. 
+- Q525 (page 262): PDF D → reviewed A. 
+- Q527 (page 263): PDF B → reviewed D. 
+- Q528 (page 264): PDF B → reviewed D. 
+- Q529 (page 264): PDF A → reviewed B. 
+- Q530 (page 265): PDF D → reviewed C. 
+- Q531 (page 265): PDF B → reviewed A. 
+- Q532 (page 266): PDF CFD → reviewed ADF. 
+- Q533 (page 266): PDF C → reviewed A. 
+- Q535 (page 267): PDF D → reviewed B. 
+- Q536 (page 268): PDF C → reviewed D. 
+- Q537 (page 268): PDF B → reviewed A. 
+- Q539 (page 269): PDF D → reviewed B. 
+- Q551 (page 275): PDF B → reviewed A. 
+- Q552 (page 276): PDF D → reviewed B. 
+- Q557 (page 278): PDF D → reviewed B. 
+- Q566 (page 283): PDF A → reviewed B. 
+- Q570 (page 285): PDF A → reviewed B. 
+- Q573 (page 286): PDF C → reviewed D. 
+- Q575 (page 287): PDF B → reviewed C. 
+- Q577 (page 288): PDF D → reviewed C. 
+- Q579 (page 289): PDF C → reviewed A. 
+- Q580 (page 289): PDF B → reviewed D. 
+- Q581 (page 290): PDF D → reviewed B. 
+- Q585 (page 292): PDF C → reviewed D. 
+- Q586 (page 292): PDF C → reviewed B. 
+- Q587 (page 293): PDF D → reviewed C. 
+- Q588 (page 293): PDF B → reviewed D. 
+- Q589 (page 294): PDF D → reviewed B. 
+- Q591 (page 295): PDF C → reviewed B. 
+- Q592 (page 295): PDF C → reviewed D. 
+- Q596 (page 297): PDF C → reviewed A. 
+- Q598 (page 298): PDF CEF → reviewed ACF. 
+- Q599 (page 298): PDF ACE → reviewed ACF. 
+- Q604 (page 301): PDF A → reviewed D. This legacy device scenario assumes an eligible existing Snowball customer; new customer availability is restricted.
+- Q605 (page 301): PDF C → reviewed D. 
+- Q609 (page 303): PDF C → reviewed B. 
+- Q612 (page 305): PDF A → reviewed D. 
+- Q614 (page 306): PDF A → reviewed D. 
+- Q615 (page 306): PDF C → reviewed D. 
+- Q616 (page 307): PDF A → reviewed C. 
+- Q617 (page 307): PDF AB → reviewed BE. 
+- Q622 (page 310): PDF CD → reviewed AD. 
+- Q623 (page 310): PDF A → reviewed B. 
+- Q625 (page 311): PDF A → reviewed C. 
+- Q656 (page 327): PDF C → reviewed D. 
+- Q667 (page 332): PDF A → reviewed C. 
+- Q671 (page 334): PDF C → reviewed B. 
+- Q672 (page 335): PDF D → reviewed B. 
+- Q673 (page 335): PDF D → reviewed B. 
+- Q674 (page 336): PDF AC → reviewed BD. 
+- Q675 (page 336): PDF C → reviewed D. 
+- Q677 (page 337): PDF D → reviewed A. 
+- Q678 (page 338): PDF A → reviewed B. 
+- Q679 (page 338): PDF CEF → reviewed ACE. 
+- Q680 (page 339): PDF D → reviewed A. 
+- Q681 (page 339): PDF C → reviewed A. 
+- Q682 (page 340): PDF B → reviewed A. 
+- Q683 (page 340): PDF CE → reviewed AC. 
+- Q686 (page 342): PDF D → reviewed C. 
+- Q688 (page 343): PDF B → reviewed C. 
+- Q689 (page 343): PDF C → reviewed D. 
+- Q690 (page 344): PDF AC → reviewed CD. 
+- Q691 (page 344): PDF AD → reviewed BE. 
+- Q692 (page 345): PDF D → reviewed A. 
+- Q693 (page 345): PDF A → reviewed D. 
+- Q695 (page 346): PDF A → reviewed B. 
+- Q696 (page 347): PDF D → reviewed C. 
+- Q697 (page 347): PDF D → reviewed B. 
+- Q698 (page 348): PDF A → reviewed B. Wording repaired. 
+- Q700 (page 349): PDF BC → reviewed AC. 
+- Q701 (page 349): PDF B → reviewed C. 
+- Q702 (page 350): PDF C → reviewed B. Import Snowball data into S3, then link FSx for Lustre to the bucket for low-latency HPC access. Snowball does not import directly into FSx.
+- Q703 (page 350): PDF D → reviewed B. 
+- Q704 (page 351): PDF A → reviewed C. 
+- Q705 (page 351): PDF AE → reviewed AD. 
+- Q707 (page 352): PDF C → reviewed B. 
+- Q708 (page 353): PDF D → reviewed C. 
+- Q709 (page 353): PDF DE → reviewed BE. 
+- Q711 (page 354): PDF B → reviewed C. 
+- Q712 (page 355): PDF C → reviewed A. 
+- Q713 (page 355): PDF D → reviewed B. 
+- Q714 (page 356): PDF C → reviewed B. Wording repaired. 
+- Q715 (page 356): PDF B → reviewed A. 
+- Q716 (page 357): PDF C → reviewed A. 
+- Q717 (page 357): PDF A → reviewed D. 
+- Q719 (page 358): PDF C → reviewed B. Wording repaired. 
+- Q720 (page 359): PDF B → reviewed C. 
+- Q721 (page 359): PDF C → reviewed D. 
+- Q722 (page 360): PDF D → reviewed A. 
+- Q725 (page 361): PDF A → reviewed B. 
+- Q727 (page 362): PDF B → reviewed C. 
+- Q729 (page 363): PDF D → reviewed B. 
+- Q732 (page 365): PDF D → reviewed B. 
+- Q735 (page 366): PDF C → reviewed A. 
+- Q737 (page 367): PDF AB → reviewed CE. 
+- Q738 (page 368): PDF A → reviewed B. 
+- Q739 (page 368): PDF D → reviewed B. EventBridge rules filter events and invoke target Lambda functions without adding queues and polling consumers.
+- Q741 (page 369): PDF C → reviewed A. 
+- Q742 (page 370): PDF B → reviewed A. 
+- Q744 (page 371): PDF D → reviewed A. 
+- Q745 (page 371): PDF A → reviewed B. 
+- Q746 (page 372): PDF BE → reviewed AC. 
+- Q747 (page 372): PDF B → reviewed C. 
+- Q748 (page 373): PDF C → reviewed A. 
+- Q749 (page 373): PDF A → reviewed B. 
+- Q750 (page 374): PDF B → reviewed C. 
+- Q753 (page 375): PDF B → reviewed D. 
+- Q754 (page 376): PDF C → reviewed B. 
+- Q755 (page 376): PDF A → reviewed B. 
+- Q757 (page 377): PDF A → reviewed C. A CloudWatch recovery action can recover a supported EC2 instance after an underlying system failure. RAID does not recover the compute instance.
+- Q758 (page 378): PDF B → reviewed A. 
+- Q760 (page 379): PDF B → reviewed C. ECS on Fargate with EFS is the supported serverless option listed. A modern alternative is configuring at least 50 GiB of Fargate ephemeral storage.
+- Q761 (page 379): PDF C → reviewed D. 
+- Q762 (page 380): PDF D → reviewed C. 
+- Q763 (page 380): PDF A → reviewed B. This legacy device scenario assumes an eligible existing Snowball customer; new customer availability is restricted.
+- Q764 (page 381): PDF A → reviewed B. 
+- Q765 (page 381): PDF A → reviewed C. 
+- Q766 (page 382): PDF B → reviewed D. 
+- Q767 (page 382): PDF B → reviewed C. 
+- Q768 (page 383): PDF C → reviewed A. 
+- Q769 (page 383): PDF C → reviewed B. 
+- Q770 (page 384): PDF D → reviewed C. 
+- Q771 (page 384): PDF D → reviewed C. 
+- Q773 (page 385): PDF A → reviewed D. 
+- Q774 (page 386): PDF C → reviewed B. 
+- Q775 (page 386): PDF A → reviewed B. Wording repaired. 
+- Q776 (page 387): PDF D → reviewed C. 
+- Q777 (page 387): PDF BC → reviewed AC. Wording repaired. Use OU launch permissions for AMIs and a KMS policy condition such as aws:PrincipalOrgPaths for eligible principals; an OU ARN is not an IAM principal.
+- Q778 (page 388): PDF C → reviewed B. This legacy device scenario assumes an eligible existing Snowball customer; new customer availability is restricted.
+- Q779 (page 388): PDF A → reviewed B. 
+- Q781 (page 389): PDF A → reviewed A. Wording repaired. 
+- Q789 (page 393): PDF D → reviewed A. 
+- Q792 (page 395): PDF D → reviewed A. 
+- Q793 (page 395): PDF D → reviewed C. Wording repaired. 
+- Q798 (page 398): PDF A → reviewed B. 
+- Q801 (page 399): PDF A → reviewed D. 
+- Q802 (page 400): PDF C → reviewed D. 
+- Q803 (page 400): PDF C → reviewed A. 
+- Q804 (page 401): PDF B → reviewed C. 
+- Q805 (page 401): PDF B → reviewed C. 
+- Q806 (page 402): PDF D → reviewed B. 
+- Q808 (page 403): PDF C → reviewed A. 
+- Q809 (page 403): PDF D → reviewed A. An EventBridge rule matches Batch state-change events. An API destination supports basic authentication and avoids custom Lambda integration code.
+- Q810 (page 404): PDF A → reviewed C. 
+- Q812 (page 405): PDF B → reviewed C. 
+- Q813 (page 405): PDF C → reviewed A. 
+- Q814 (page 406): PDF A → reviewed B. 
+- Q815 (page 406): PDF A → reviewed D. 
+- Q817 (page 407): PDF B → reviewed C. 
+- Q819 (page 408): PDF D → reviewed B. 
+- Q824 (page 411): PDF B → reviewed C. 
+- Q825 (page 411): PDF A → reviewed B. 
+- Q840 (page 419): PDF A → reviewed B. 
+- Q841 (page 419): PDF A → reviewed B. Use the EBS snapshot archive tier for long-retained monthly snapshots; EBS snapshots cannot simply be copied into a customer S3 Glacier bucket. Archive snapshots are full copies, so check actual changed-block and retention costs.
+- Q855 (page 426): PDF A → reviewed C. 
+- Q857 (page 427): PDF D → reviewed A. 
+- Q860 (page 429): PDF C → reviewed A. 
+- Q865 (page 431): PDF AB → reviewed AE. 
+- Q873 (page 435): PDF A → reviewed B. 
+- Q876 (page 436): PDF CD → reviewed BD. 
+
+### Flagged, excluded from tests
+
+- Q49 (page 24): The source relies on legacy Glacier Select and mixes archive retrieval and query mechanisms; its choices need a current replacement.
+- Q64 (page 31): The selected solution uses FSx File Gateway; its current service availability or replacement needs additional review.
+- Q67 (page 33): Increasing visibility timeout reduces repeated delivery but does not guarantee exactly-once application processing.
+- Q82 (page 40): Both certificate-expiry monitoring approaches can meet the stated requirement; the stem does not distinguish them.
+- Q96 (page 48): The IAM policy is an image missing from the extracted question; its answer cannot be checked from the available text.
+- Q102 (page 51): The proposed DataSync workflow uses SFTP as a source location; DataSync requires a supported storage location such as NFS.
+- Q108 (page 54): RDS event notifications do not report individual table-row changes, and the other choices do not provide the required fan-out.
+- Q138 (page 68): The choice describes a two-node active/standby RabbitMQ deployment; Amazon MQ RabbitMQ Multi-AZ uses three nodes.
+- Q145 (page 71): The choice mixes an Auto Scaling launch template with a Spot Fleet configuration; it does not describe a valid deployment.
+- Q146 (page 72): Spot capacity alone cannot guarantee unchanged application availability during traffic peaks.
+- Q159 (page 78): API keys are not authentication or authorization; the remaining choices do not clearly preserve required public access.
+- Q177 (page 87): DAX requires application/client configuration changes, conflicting with the no-reconfiguration requirement.
+- Q198 (page 97): DocumentDB compatibility alone cannot guarantee that an arbitrary MongoDB application needs no changes.
+- Q201 (page 99): The proposed Pinpoint journey does not establish the required two-way SMS ingestion workflow; the service also needs lifecycle review.
+- Q234 (page 115): The proposed solution does not cover all required in-transit connections, including the load balancer backend and database connection.
+- Q235 (page 115): A single DMS CDC task does not safely synchronize concurrent writes to both databases; conflict handling and direction are unspecified.
+- Q245 (page 120): Reducing an Auto Scaling maximum alone does not establish the required running capacity; the configuration is incomplete.
+- Q253 (page 125): The required IAM policy image is missing from the extracted text.
+- Q255 (page 126): FIFO queues do not prevent separately created duplicate orders; the design also needs application idempotency.
+- Q257 (page 127): CloudWatch metric streams are not Auto Scaling lifecycle event streams.
+- Q267 (page 132): The selected solution uses Kinesis Data Analytics; its current service availability or replacement needs additional review.
+- Q284 (page 141): Attributing costs to individual creators requires ownership tags or equivalent attribution data that the question does not establish.
+- Q292 (page 144): The selected solution uses Kinesis Data Analytics; its current service availability or replacement needs additional review.
+- Q302 (page 149): The source gives only one answer to a choose-two question and relies on a retired Elastic Transcoder workflow.
+- Q308 (page 152): The account scope of the Trusted Advisor recommendation needs additional confirmation before this choose-two answer can be scored.
+- Q320 (page 158): The selected solution uses Kinesis Data Analytics; its current service availability or replacement needs additional review.
+- Q321 (page 158): S3 now encrypts new uploads by default; the question does not distinguish encryption from requiring an explicit request header.
+- Q324 (page 160): The claimed single stored-volume capacity exceeds Storage Gateway limits; the scenario needs multiple volumes.
+- Q337 (page 166): The proposed Aurora migration unnecessarily replaces supported stored procedures; its compatibility assumptions are unclear.
+- Q353 (page 174): The stated IOPS workload is ambiguous and does not establish that the proposed storage meets both read and write requirements.
+- Q364 (page 180): The proposed encryption choices do not enforce all of the required in-transit encryption paths.
+- Q366 (page 181): API keys cannot implement premium-user authentication; none of the stated options fully implements the required authorization.
+- Q371 (page 183): The KMS permissions are assigned to the wrong role for encrypted node volumes; Auto Scaling service-linked role grants are needed.
+- Q394 (page 195): More than one storage change can improve the stated IOPS bottleneck; the question does not select a unique best solution.
+- Q423 (page 210): The required policy image is missing from the extracted text.
+- Q429 (page 213): The required policy image is missing from the extracted text.
+- Q440 (page 219): Only the snapshot migration choice is clearly valid. The other choices confuse SQL dumps, physical S3 imports, and DMS snapshot imports.
+- Q443 (page 220): S3 Transfer Acceleration accelerates object transfers, not the entire hosted application as the option claims.
+- Q454 (page 226): The named solution and its current support status require further documentation review.
+- Q457 (page 227): The proposed custom identity provider does not match the AS2 certificate/agreement authentication model.
+- Q477 (page 237): The source choices are policy images and were not recovered as readable answer text.
+- Q485 (page 241): Expedited archive retrieval is not an unconditional five-minute guarantee; capacity and object-size conditions are missing.
+- Q490 (page 244): DynamoDB PITR does not automatically create continuous S3 exports; the export workflow is unspecified.
+- Q500 (page 249): The source relies on a legacy Snowcone workflow and its device/transfer assumptions need replacement.
+- Q501 (page 250): The source relies on the retired Kinesis Data Analytics SQL workflow.
+- Q507 (page 253): The choices do not clearly provide the stated single-primary, globally consistent architecture; regional read replicas can lag.
+- Q511 (page 255): The Aurora alternatives overlap and omit lifecycle controls; the question does not establish a unique lowest-cost answer.
+- Q514 (page 256): An EKS service interface endpoint is not the Kubernetes private API endpoint; the required network and authentication configuration is incomplete.
+- Q515 (page 257): The proposed database combination does not clearly meet the stated request rate and analytical workload constraints.
+- Q534 (page 267): Archive minimum-duration charges and object sizes make the claimed cost comparison under-specified.
+- Q540 (page 270): The proposed Oracle-to-Aurora migration has unresolved engine-conversion and availability assumptions.
+- Q565 (page 282): Aurora reader Auto Scaling does not scale writer compute; the question does not limit the bottleneck to reads.
+- Q571 (page 285): The TLS 1.3 requirement needs confirmation against the selected API Gateway API type and security policy.
+- Q582 (page 290): Latency routing needs correctly associated records for both endpoints; the options omit that configuration.
+- Q583 (page 291): The described Snowball-to-Tape-Gateway import workflow is not a supported direct migration path.
+- Q593 (page 296): Asynchronous Redis replication alone cannot guarantee zero write loss during the stated failure.
+- Q618 (page 308): Daily cross-Region backups cannot meet a five-minute disaster-recovery RPO.
+- Q638 (page 318): The SFTP identity-provider and least-overhead choice requires further review.
+- Q663 (page 330): The options confuse ECS task and execution roles and RDS control-plane endpoints with database connectivity.
+- Q664 (page 331): Both dynamic scaling choices may work; the prompt does not establish a unique instance-family choice, while the voted predictive option is under-specified.
+- Q668 (page 333): Tag policies alone do not require missing tags to be present when a resource is created.
+- Q670 (page 334): The cost comparison depends on missing capacity and scaling assumptions.
+- Q687 (page 342): The Forecast workflow, asynchronous prediction handling, and service eligibility require replacement or clarification.
+- Q694 (page 346): Redis alone does not establish durable cart preservation at all times.
+- Q718 (page 358): The option conflates a managed EMR cluster with EMR on EKS on Outposts.
+- Q723 (page 360): Default Host Management Configuration enrolls instances but does not itself provide the required patch orchestration.
+- Q728 (page 363): The wording does not distinguish archive retrieval fees from data-transfer charges.
+- Q734 (page 366): A Direct Connect gateway does not by itself provide transitive VPC-to-VPC or data-center-to-data-center routing.
+- Q740 (page 369): SSE-C cannot be configured as S3 default bucket encryption as the source proposes.
+- Q743 (page 370): Providing a CA certificate alone does not enforce encrypted MySQL connections; client TLS mode and server requirements are omitted.
+- Q752 (page 375): SQS FIFO does not guarantee exactly-once Lambda application execution; idempotent processing is also required.
+- Q756 (page 377): The answer labels are incomplete or inconsistent.
+- Q759 (page 378): The five-minute retrieval promise is not guaranteed for all 1–10 GB archived objects with expedited retrieval.
+- Q772 (page 385): A generic Docker application cannot run unchanged in Lambda without its runtime and execution constraints being met.
+- Q783 (page 390): Amazon QLDB reached end of support on July 31, 2025; this is not a current deployment choice.
+- Q785 (page 391): FIFO transport alone does not prevent duplicate payment side effects during Lambda retries.
+- Q799 (page 398): Generic Comprehend entity detection does not establish reliable ingredient extraction without a suitable model or parser.
+- Q800 (page 399): VPC peering alone does not establish supported cross-account Lambda EFS attachment, access-point permissions, and mount configuration.
+- Q807 (page 402): Provisioned concurrency adds cost; the information supplied does not establish that it is the cost-minimizing configuration.
+- Q827 (page 412): Aurora I/O-Optimized is a pricing choice, not a guarantee of improved storage performance; the required I/O cost ratio is unspecified.
+- Q851 (page 424): The overlapping Aurora choices and unspecified database start/stop lifecycle do not establish a unique cheapest answer.
+- Q859 (page 428): The account scope of Trusted Advisor reserved-instance recommendations requires additional confirmation.
+- Q868 (page 432): Answer option A was not recovered from the PDF text; the question is incomplete.
+- Q869 (page 433): SQS FIFO with Lambda still requires idempotent business processing to guarantee no duplicate side effects.

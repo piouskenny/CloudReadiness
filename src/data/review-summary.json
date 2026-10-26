@@ -1,0 +1,29 @@
+{
+  "clf": {
+    "imported": 229,
+    "reviewed": 228,
+    "flagged": 1,
+    "correctedKeys": 6,
+    "wordingRepairs": 19,
+    "domains": {
+      "Billing, Pricing, and Support": 41,
+      "Cloud Technology and Services": 112,
+      "Security and Compliance": 57,
+      "Cloud Concepts": 18
+    }
+  },
+  "saa": {
+    "imported": 882,
+    "reviewed": 798,
+    "flagged": 84,
+    "correctedKeys": 302,
+    "wordingRepairs": 15,
+    "domains": {
+      "Design High-Performing Architectures": 290,
+      "Design Secure Architectures": 223,
+      "Design Resilient Architectures": 138,
+      "Design Cost-Optimized Architectures": 147
+    }
+  },
+  "method": "All imported prompts and candidate solutions received AI content review. AWS documentation was consulted for targeted issues, not individually for every question. Community votes and printed keys are not proof of correctness. Flagged questions remain available for inspection but are excluded from tests. Domain and service labels are inferred study aids."
+}
