@@ -1,24 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { exams, loadExam } from './questionBank.js';
 import QuestionLibrary from './QuestionLibrary.jsx';
-import { createSession, scoreSession } from './examSession.js';
+import { createSession } from './examSession.js';
+import ResultsReview from './ResultsReview.jsx';
 
 const Logo = () => <img className="brand-mark" src="/company-mark.png" alt="Company mark" />;
-
-function groupPerformance(items, responses, getLabels) {
-  const groups = new Map();
-  items.forEach((item) => {
-    const selected = responses[item.id] ?? [];
-    const correct = selected.length === item.answers.length && item.answers.every((id) => selected.includes(id));
-    getLabels(item).forEach((label) => {
-      if (!groups.has(label)) groups.set(label, { label, total: 0, correct: 0 });
-      const group = groups.get(label);
-      group.total += 1;
-      if (correct) group.correct += 1;
-    });
-  });
-  return [...groups.values()].map((group) => ({ ...group, accuracy: Math.round((group.correct / group.total) * 100) }));
-}
 
 function App() {
   const [screen, setScreen] = useState('home');
@@ -42,16 +28,6 @@ function App() {
   const question = sessionQuestions[current];
   const total = sessionQuestions.length;
   const selected = question ? answers[question.id] ?? [] : [];
-  const attempted = useMemo(() => Object.values(answers).filter((value) => value.length > 0).length, [answers]);
-  const scoreableQuestions = sessionQuestions.filter((item) => sessionMode !== 'full' || !unscoredIds.has(item.id));
-  const score = scoreSession(scoreableQuestions, answers);
-  const domainPerformance = groupPerformance(scoreableQuestions, answers, (item) => [item.domain]);
-  const servicePerformance = groupPerformance(scoreableQuestions, answers, (item) => item.services ?? []);
-  const focusAreas = [
-    ...domainPerformance.map((area) => ({ ...area, kind: 'Domain' })),
-    ...servicePerformance.map((area) => ({ ...area, kind: 'Service' })),
-  ].filter((area) => area.accuracy < 70).sort((a, b) => a.accuracy - b.accuracy);
-
   useEffect(() => {
     if (screen !== 'exam' || sessionMode !== 'full' || review || !deadline) return undefined;
     const updateClock = () => {
@@ -188,23 +164,11 @@ function App() {
   if (screen === 'results') {
     return (
       <div className="app-shell"><header className="topbar"><button className="brand brand-button" onClick={() => { setScreen('home'); setActiveExam(null); }}><Logo /><span>Cloud<span className="brand-light">Readiness</span></span></button><div className="topbar-right"><span className="internal-badge"><span className="status-dot" /> Practice result</span></div></header>
-        <main className="result-wrap">
-          <div className="result-card">
-            <div className="result-check">✓</div><p className="eyebrow">SESSION COMPLETE · {exam.code}</p><h1>Nice work showing up.</h1>
-            <p className="result-lead">You answered {attempted} of {total} questions.</p>
-            <div className="score-ring"><strong>{Math.round((score / scoreableQuestions.length) * 100)}<small>%</small></strong><span>{score} of {scoreableQuestions.length} scored correct</span></div>
-            <p className="disclaimer">{sessionMode === 'full' ? `${exam.unscoredQuestions} questions were excluded from this practice score, as in the exam format. This percentage is not an AWS scaled score.` : 'This is a practice percentage, not an AWS scaled score.'}</p>
-            <section className="feedback-report">
-              <div className="feedback-heading"><h2>Your focus report</h2><p>Based on scored questions only, with inferred domain and service tags. Small samples can shift the percentages. Review missed questions and their AWS references below.</p></div>
-              {focusAreas.length > 0 ? <div className="focus-list">{focusAreas.map((area) => <div className="focus-row" key={`${area.kind}-${area.label}`}><span className="focus-kind">{area.kind === 'Service' ? 'SERVICE' : 'EXAM DOMAIN'}</span><div className="focus-main"><b>{area.label}</b><span>{area.correct} of {area.total} correct · {area.total === 1 ? '1 question' : `${area.total} questions`}</span></div><strong>{area.accuracy}%</strong></div>)}</div> : <p className="no-focus">No clear focus area showed up in this session. Keep practicing across the domains and services.</p>}
-              <div className="report-columns">
-                <div className="report-section"><h3>Exam domains</h3>{domainPerformance.map((area) => <div className="performance-row" key={area.label}><div><span>{area.label}</span><b>{area.accuracy}%</b></div><div className="performance-track"><i style={{ width: `${area.accuracy}%` }}/></div><small>{area.correct}/{area.total} correct</small></div>)}</div>
-                <div className="report-section"><h3>AWS services</h3>{servicePerformance.length ? servicePerformance.map((area) => <div className="performance-row" key={area.label}><div><span>{area.label}</span><b>{area.accuracy}%</b></div><div className="performance-track"><i style={{ width: `${area.accuracy}%` }}/></div><small>{area.correct}/{area.total} correct</small></div>) : <p className="no-services">No service-specific questions were included in this session.</p>}</div>
-              </div>
-            </section>
-            <div className="result-actions"><button className="primary-button" onClick={() => { setScreen('exam'); setReview(true); setCurrent(0); }}>Review answers <span>→</span></button><button className="secondary-button" onClick={() => { setScreen('home'); setActiveExam(null); }}>Back to exams</button></div>
-          </div>
-        </main>
+        <ResultsReview exam={exam} questions={sessionQuestions} answers={answers}
+          unscoredIds={sessionMode === 'full' ? unscoredIds : new Set()}
+          onPractice={() => setScreen('setup')}
+          onBack={() => { setScreen('home'); setActiveExam(null); }}/>
+
       </div>
     );
   }
