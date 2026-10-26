@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { exams } from './questionBank.js';
+import { exams, loadExam } from './questionBank.js';
 import QuestionLibrary from './QuestionLibrary.jsx';
 import { createSession, scoreSession } from './examSession.js';
 
@@ -23,6 +23,8 @@ function groupPerformance(items, responses, getLabels) {
 function App() {
   const [screen, setScreen] = useState('home');
   const [activeExam, setActiveExam] = useState(null);
+  const [loadingExam, setLoadingExam] = useState(null);
+  const [loadError, setLoadError] = useState('');
   const [mode, setMode] = useState('full');
   const [sessionMode, setSessionMode] = useState('full');
   const [customCount, setCustomCount] = useState(10);
@@ -35,7 +37,7 @@ function App() {
   const [marked, setMarked] = useState(new Set());
   const [review, setReview] = useState(false);
 
-  const exam = activeExam ? exams[activeExam] : null;
+  const exam = activeExam;
   const availableQuestions = exam?.questions.filter((item) => item.validation?.status === 'reviewed') ?? [];
   const question = sessionQuestions[current];
   const total = sessionQuestions.length;
@@ -63,15 +65,25 @@ function App() {
     return () => { window.clearInterval(timer); window.removeEventListener('focus', updateClock); };
   }, [screen, sessionMode, review, deadline]);
 
-  function begin(id) {
-    setActiveExam(id);
-    setMode('full');
-    setCustomCount(10);
-    setCurrent(0);
-    setAnswers({});
-    setMarked(new Set());
-    setReview(false);
-    setScreen('setup');
+  async function begin(id) {
+    if (loadingExam) return;
+    setLoadingExam(id);
+    setLoadError('');
+    try {
+      const loaded = await loadExam(id);
+      setActiveExam(loaded);
+      setMode('full');
+      setCustomCount(10);
+      setCurrent(0);
+      setAnswers({});
+      setMarked(new Set());
+      setReview(false);
+      setScreen('setup');
+    } catch {
+      setLoadError('Could not load the questions. Check your connection and choose the exam again to retry.');
+    } finally {
+      setLoadingExam(null);
+    }
   }
 
   function startSession(selectedMode, requestedCount) {
@@ -125,6 +137,8 @@ function App() {
           </div>
 
           <section className="exam-section">
+            {loadError && <p role="alert" className="hold-note">{loadError}</p>}
+            {loadingExam && <p role="status">Loading {exams[loadingExam].code} questions…</p>}
             <div className="section-heading"><div><p className="eyebrow">YOUR PRACTICE PATH</p><h2>Choose a certification</h2></div><span className="question-bank-note"><span className="status-dot" /> PDF questions imported</span></div>
             <div className="exam-grid">
               {Object.values(exams).map((item) => (
@@ -133,7 +147,7 @@ function App() {
                   <div className="exam-icon" aria-hidden="true">{item.id === 'clf' ? <svg viewBox="0 0 48 48"><path d="M14 31a10 10 0 0 1 .3-20 12 12 0 0 1 22.4 3 9 9 0 0 1-.8 17H14Z"/><path d="M24 20v15m-5-5 5 5 5-5"/></svg> : <svg viewBox="0 0 48 48"><path d="M8 38h32M12 31l8-9 6 4 11-14"/><path d="M29 12h8v8"/><circle cx="12" cy="31" r="2"/><circle cx="20" cy="22" r="2"/><circle cx="26" cy="26" r="2"/></svg>}</div>
                   <h3>{item.title}</h3><p className="card-description">{item.description}</p><p className="bank-count">{item.bankSummary.imported} imported · {item.bankSummary.reviewed} ready · {item.bankSummary.flagged} flagged</p>
                   <div className="card-stats"><div><b>{item.examLength}</b><span>exam questions</span></div><i/><div><b>{item.minutes} min</b><span>time limit</span></div></div>
-                  <button className="primary-button" onClick={() => begin(item.id)}>Choose exam type <span>→</span></button>
+                  <button className="primary-button" disabled={Boolean(loadingExam)} onClick={() => begin(item.id)}>{loadingExam === item.id ? 'Loading questions…' : 'Choose exam type'} <span>→</span></button>
                 </article>
               ))}
               <article className="coming-card"><div className="plus-icon">+</div><h3>More exams soon</h3><p>We’ll add more AWS certifications as your learning path grows.</p><span className="coming-tag">COMING NEXT</span></article>
